@@ -2,12 +2,12 @@
   <h2>Survey: <%= @survey.name.upcase %></h2>
   <% @questions.each do |question| %>
     <a href="/questions/<%= question.id %>">
-      <img src="<%= question.file.thumb.url %>"></img>
+     
     </a>
   <% end %>
 
 
-  <form action="/surveys/<%= @survey.id %>/questions/create" method="post" enctype="multipart/form-data">
+ <!--  <form action="/surveys/<%= @survey.id %>/questions/create" method="post" enctype="multipart/form-data">
     <h3>Add a Question</h3>  
 
     <div>
@@ -25,6 +25,6 @@
 <br>
     <input type="submit" value="Add!">
 
-  </form>
+  </form> -->
 
 </div>

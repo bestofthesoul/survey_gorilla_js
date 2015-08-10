@@ -1,0 +1,62 @@
+
+<!-- CREATE NEW SURVEY -->
+<div class ="container">
+	<p>Survey: <%= @survey.name.upcase %></p>
+	<!-- <form action="/surveys/complete" method="post"> -->
+			<button id="add_question">Add Questions</button>
+
+		 	 <div id="questions">
+			<!-- AJAX WILL FILL THIS SECTION WITH QUESTIONS AND CHOICES -->
+		 	 </div>
+
+			<br><br>
+			<input type="submit" value="Submit!">
+
+		<!-- </form> -->
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+//Variable initialization
+  var question_counter = 0
+  var answer_counter = 0
+
+	function getQuestion() {
+	  question_counter++;
+	  answer_counter = 0;
+	  return(
+	  	'<div id="question-'+question_counter+'">\
+
+	    <label for="q-'+question_counter+'">Question '+question_counter+'</label>\
+
+	    <textarea name="q-'+question_counter+'"></textarea>\
+
+	    <button class="add_choice">Add New Choice</button></div>'
+	  )
+	};
+
+
+	function getAnswer() {
+	  answer_counter++;
+	  return ('<textarea name="question-'+question_counter+'-answer-'+answer_counter+'"></textarea>')
+	};
+
+
+	$("#add_question").on('click', function(e){
+	  e.preventDefault();
+	  $("#questions").append(getQuestion());
+	});
+
+
+	$("#container").on('click', '.add_choice',function(e){
+	  e.preventDefault();
+	  $(this).parent().append(getAnswer());
+	});
+
+
+});
+
+
+
+</script>

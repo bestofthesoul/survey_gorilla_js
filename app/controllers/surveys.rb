@@ -6,11 +6,10 @@ get '/surveys' do  #THIS LINK ON LAYOUT (APPLIED TO ALL PAGES)
 end
 
 
-# READ - SHOW
-get '/surveys/:id' do
-  @survey = Survey.find(params[:id])
-  @questions = @survey.questions
-  erb :'surveys/show'
+
+
+get '/surveys/create' do
+    erb :"surveys/create"
 end
 
 #CREATE - CREATE
@@ -19,10 +18,23 @@ post '/surveys/create' do
   @survey = @user.surveys.new(params[:survey])
 
   if @survey.save
-    redirect to "/surveys/#{@survey.id}"
+    erb :"surveys/create2"
   else
-    erb :"surveys/index"
+    redirect to '/'
   end
 
 end
 
+
+post '/surveys/complete' do
+erb :complete
+
+end
+
+
+# READ - SHOW
+get '/surveys/:id' do
+  @survey = Survey.find(params[:id])
+  @questions = @survey.questions
+  erb :"surveys/show"
+end

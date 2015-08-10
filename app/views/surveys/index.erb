@@ -2,16 +2,13 @@
 	<h1>Your Surveys</h1>
 	<% @surveys.each_with_index do |survey, index| %>
 	  <a href="/surveys/<%= survey.id %>">
-	    <p><%= "#{index + 1}. #{survey.name.upcase}" %></p>
+	    <p><%= "#{index + 1}. #{survey.name}" %></p>
 	  </a>
 	<% end %>
-</div>
 
-<!-- CREATE NEW SURVEY -->
-<div class ="container">
-	<h5>Create new survey</h5>
-	<form action="/surveys/create" method="post">
-		<input type="text" name="survey[name]" placeholder = "survey name">
-		<input type="submit" value="Create Survey">
+
+	<form action ="/surveys/create" method ="get">
+		<button id="create_survey">Create Survey</button>
 	</form>
+
 </div>
