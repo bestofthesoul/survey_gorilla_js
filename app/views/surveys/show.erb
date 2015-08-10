@@ -1,0 +1,30 @@
+<div class ="container">
+  <h2>Survey: <%= @survey.name.upcase %></h2>
+  <% @questions.each do |question| %>
+    <a href="/questions/<%= question.id %>">
+      <img src="<%= question.file.thumb.url %>"></img>
+    </a>
+  <% end %>
+
+
+  <form action="/surveys/<%= @survey.id %>/questions/create" method="post" enctype="multipart/form-data">
+    <h3>Add a Question</h3>  
+
+    <div>
+      <label> List the Question? </label>
+      <input type="text" name="question[description]" placeholder ="description">
+    </div>
+
+    <div>
+      <label>Upload Any Picture?</label>
+      <input type="file" name="question[file]">
+    </div>
+
+
+
+<br>
+    <input type="submit" value="Add!">
+
+  </form>
+
+</div>

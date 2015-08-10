@@ -1,0 +1,17 @@
+<div class ="container">
+	<h1>Your Surveys</h1>
+	<% @surveys.each_with_index do |survey, index| %>
+	  <a href="/surveys/<%= survey.id %>">
+	    <p><%= "#{index + 1}. #{survey.name.upcase}" %></p>
+	  </a>
+	<% end %>
+</div>
+
+<!-- CREATE NEW SURVEY -->
+<div class ="container">
+	<h5>Create new survey</h5>
+	<form action="/surveys/create" method="post">
+		<input type="text" name="survey[name]" placeholder = "survey name">
+		<input type="submit" value="Create Survey">
+	</form>
+</div>

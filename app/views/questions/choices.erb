@@ -1,0 +1,9 @@
+
+    <div>
+    	<form action="/surveys/<%= @survey.id %>/questions/<%= @question.id %>/choices/create" method="post">
+    <label>List Options to Answer?</label>
+    <input type="text" name="choice[one]" placeholder ="choice 1">
+    <input type="text" name="choice[two]" placeholder ="choice 2">
+        <input type="submit" value="Add!">
+    </form>
+    </div>
