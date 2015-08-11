@@ -26,8 +26,19 @@ post '/surveys/create' do
 end
 
 
-post '/surveys/complete' do
-erb :complete
+post '/surveys/:id/complete' do
+  @survey = Survey.find(params[:id])
+
+  params[:question].each do |k, v|
+
+  @question = @survey.questions.create(description: v)
+  end
+
+  params[:choice].each do |k, v|
+  @question.choices.create(description: v)
+  end
+
+  erb :complete
 
 end
 
@@ -35,6 +46,7 @@ end
 # READ - SHOW
 get '/surveys/:id' do
   @survey = Survey.find(params[:id])
+  # byebug
   @questions = @survey.questions
   erb :"surveys/show"
 end

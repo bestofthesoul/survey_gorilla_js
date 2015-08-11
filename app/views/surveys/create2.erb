@@ -1,8 +1,9 @@
 
 <!-- CREATE NEW SURVEY -->
 <div class ="container">
+<div id ="container">
 	<p>Survey: <%= @survey.name.upcase %></p>
-	<!-- <form action="/surveys/complete" method="post"> -->
+	<form action="/surveys/<%= @survey.id %>/complete" method="post">
 			<button id="add_question">Add Questions</button>
 
 		 	 <div id="questions">
@@ -12,34 +13,32 @@
 			<br><br>
 			<input type="submit" value="Submit!">
 
-		<!-- </form> -->
+		</form>
 	</div>
 </div>
+</div>
+
 
 <script>
 $(document).ready(function() {
-//Variable initialization
   var question_counter = 0
-  var answer_counter = 0
+  var choice_counter = 0
 
 	function getQuestion() {
 	  question_counter++;
-	  answer_counter = 0;
+	  choice_counter = 0;
 	  return(
 	  	'<div id="question-'+question_counter+'">\
-
 	    <label for="q-'+question_counter+'">Question '+question_counter+'</label>\
-
-	    <textarea name="q-'+question_counter+'"></textarea>\
-
-	    <button class="add_choice">Add New Choice</button></div>'
+	    <textarea name="question[q-'+question_counter+']"></textarea>\
+	    <button class="add_choice">Add Choice</button></div>'
 	  )
 	};
 
 
-	function getAnswer() {
-	  answer_counter++;
-	  return ('<textarea name="question-'+question_counter+'-answer-'+answer_counter+'"></textarea>')
+	function getChoice() {
+	  choice_counter++;
+	  return ('<textarea name="choice[question-'+question_counter+'-choice-'+choice_counter+']"></textarea>')
 	};
 
 
@@ -51,12 +50,10 @@ $(document).ready(function() {
 
 	$("#container").on('click', '.add_choice',function(e){
 	  e.preventDefault();
-	  $(this).parent().append(getAnswer());
+	  $(this).parent().append(getChoice());
 	});
 
 
 });
-
-
 
 </script>
