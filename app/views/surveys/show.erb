@@ -1,7 +1,23 @@
 <div class ="container">
-  <h2>Survey: <%= @survey.name.upcase %></h2>
-  <% @survey.questions.each do |question| %>
-    <a href="/questions/<%= question.id %>"><%= question.description %></a>
-  <% end %>
+  
+  <form action ="/surveys/<%= @survey.id %>/complete" method ="post">
+    <h2>Survey: <%= @survey.name.upcase %></h2>
 
-</div>
+    <% @survey.questions.each do |question| %><br>  
+    <strong><%= question.description %></strong><br>
+
+      <% question.choices.each do |choice| %>
+      <!-- once name is defined as question.id, radio button allows us to pick one as answer only -->
+      <input id = "a" type="radio" name="questions[<%= question.id %>]" value="<%= choice.id %>"><%= choice.description %><br>
+      <% end %>
+    <% end %><br><br>
+    <input type="submit" value=  "submit answer">
+  </form>
+  
+  <br>
+
+  <form action ="/surveys/create" method ="post"><input type="submit" value=  "add question">
+  </form>
+
+
+</div>  

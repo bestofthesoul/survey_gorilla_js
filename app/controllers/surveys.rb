@@ -5,17 +5,15 @@ get '/surveys' do  #THIS LINK ON LAYOUT (APPLIED TO ALL PAGES)
   erb :"surveys/index"
 end
 
-
-
-
+#CREATE-CREATE 1
 get '/surveys/create' do
     erb :"surveys/create"
 end
 
-#CREATE - CREATE
+#CREATE-SHOW 1
 post '/surveys/create' do
   @user = User.find(session[:id])
-  @survey = @user.surveys.new(params[:survey])
+  @survey = @user.surveys.find_or_initialize_by(params[:survey])
 
   if @survey.save
     erb :"surveys/create2"
@@ -25,20 +23,21 @@ post '/surveys/create' do
 
 end
 
-
-post '/surveys/:id/complete' do
+#CREATE-SHOW 2
+post '/surveys/:id/create' do
   @survey = Survey.find(params[:id])
 
   params[:question].each do |k, v|
-
-  @question = @survey.questions.create(description: v)
+  @survey.questions.create(description: v)
   end
+
+  @question = @survey.questions.last
 
   params[:choice].each do |k, v|
   @question.choices.create(description: v)
   end
 
-  erb :complete
+  redirect to "/surveys/#{@survey.id}"
 
 end
 
@@ -46,7 +45,18 @@ end
 # READ - SHOW
 get '/surveys/:id' do
   @survey = Survey.find(params[:id])
-  # byebug
-  @questions = @survey.questions
+
   erb :"surveys/show"
+end
+
+
+post '/surveys/:id/complete' do
+  @user = User.find(session[:id])
+  @survey = Survey.find(params[:id])
+  
+  @survey.questions.each_with_index do |question, index|
+  @answer =Answer.create(question: question, choice_id: params[:questions].values[index])
+  end
+  
+  erb :complete
 end

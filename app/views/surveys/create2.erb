@@ -2,8 +2,8 @@
 <!-- CREATE NEW SURVEY -->
 <div class ="container">
 <div id ="container">
-	<p>Survey: <%= @survey.name.upcase %></p>
-	<form action="/surveys/<%= @survey.id %>/complete" method="post">
+	<p>Survey: <%= @survey.name%></p>
+	<form action="/surveys/<%= @survey.id %>/create" method="post">
 			<button id="add_question">Add Questions</button>
 
 		 	 <div id="questions">
@@ -31,6 +31,7 @@ $(document).ready(function() {
 	  	'<div id="question-'+question_counter+'">\
 	    <label for="q-'+question_counter+'">Question '+question_counter+'</label>\
 	    <textarea name="question[q-'+question_counter+']"></textarea>\
+	    <br><br>	\
 	    <button class="add_choice">Add Choice</button></div>'
 	  )
 	};

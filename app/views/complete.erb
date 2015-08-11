@@ -1,1 +1,16 @@
+
+<div class = "container">
 <p>complete</p>
+Hi, <%= @user.username%>
+<br>
+Survey: <strong><%= @survey.name %></strong>
+
+
+<% @survey.questions.each do |question| %><br>  
+    Question: <strong><%= question.description %></strong><br>
+	<% question.answers.each do |answer| %>
+		<%= answer.choice.description %>
+	<% end %>
+<% end %><br><br>
+
+</div>	
